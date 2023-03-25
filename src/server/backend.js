@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(cors())
 
 //----------- Add new user to database -----------
-app.post('/signUp', (req, res) => {
+app.post('/signUp', cors(), (req, res) => {
     // process request information
     let { userName, password } = req.body
     let token = jwt.sign(password, privateKey)
@@ -33,7 +33,7 @@ app.post('/signUp', (req, res) => {
 })
 
 //----------- check user login data in database -----------
-app.post('/login', (req, res) => {
+app.post('/login', cors(), (req, res) => {
     // process request information
     let { userName, password } = req.body
     let token = jwt.sign(password, privateKey)
@@ -63,7 +63,7 @@ app.post('/login', (req, res) => {
 })
 
 //----------- Get List of All Notes from database -----------
-app.post('/notes', (req, res) => {
+app.post('/notes', cors(), (req, res) => {
     let { userId } = req.body
     async function getNotes() {
         let notesList = await notesModel.find({ userId: userId })
@@ -73,7 +73,7 @@ app.post('/notes', (req, res) => {
 })
 
 //----------- add new note to database -----------
-app.post('/addNote', (req, res) => {
+app.post('/addNote', cors(), (req, res) => {
     let { title, text, userId } = req.body
     let currentDate = new Date()
     let date = `${currentDate.getDate()}-${currentDate.getMonth()}-${currentDate.getFullYear()}`
@@ -93,7 +93,7 @@ app.post('/addNote', (req, res) => {
 })
 
 //----------- update note to database -----------
-app.put('/updateNote', (req, res) => {
+app.put('/updateNote', cors(), (req, res) => {
     // process request information
     let { title, text, noteId } = req.body
     async function updateNote() {
@@ -116,7 +116,7 @@ app.put('/updateNote', (req, res) => {
 })
 
 //----------- delete note from database -----------
-app.delete('/deleteNote/:noteId', (req, res) => {
+app.delete('/deleteNote/:noteId', cors(), (req, res) => {
     let noteId = req.params.noteId
     console.log(req.body)
     async function deleteNote() {
@@ -132,7 +132,7 @@ app.delete('/deleteNote/:noteId', (req, res) => {
 })
 
 //----------- delete all notes of user from database -----------
-app.delete('/deleteAll/:userId', (req, res) => {
+app.delete('/deleteAll/:userId', cors(), (req, res) => {
     let userId = req.params.userId
     async function deleteAllNotes() {
         try {
