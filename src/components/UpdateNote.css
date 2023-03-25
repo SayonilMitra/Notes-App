@@ -1,0 +1,22 @@
+.update-note {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.update-note textarea {
+  width: 400px;
+  height: 300px;
+}
+.update-note input {
+  width: 100%;
+}
+
+#update-btn {
+  background-color: rgb(67, 142, 255);
+  border: none;
+  padding: 10px;
+  width: 100%;
+  color: white;
+  margin-top: 20px;
+  cursor: pointer;
+}
