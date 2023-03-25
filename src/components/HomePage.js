@@ -6,7 +6,7 @@ import NavBar from './NavBar'
 
 function HomePage() {
 
-    //let [search, setSearch] = useState('')
+    let [search, setSearch] = useState('')
     let userId = localStorage.getItem('userId')
     let [notesList, setNotesList] = useState([])
     let backendLink = require('../server/backendLink')
@@ -21,17 +21,17 @@ function HomePage() {
 
     return <div className='homepage'>
         <NavBar />
-        {/*<div className='homepage-search-bar'>
+        <div className='homepage-search-bar'>
             <input type='text' placeholder='Search'
                 onChange={(e) => {
-                    searchText(e)
+                    setSearch(e.target.value)
                 }} />
-        </div>*/}
+        </div>
         <div>
             <ul>
                 {notesList.map((item, index) => {
                     return <li key={index}>
-                        <NotesListItem notesItem={item} />
+                        <NotesListItem notesItem={item} search={search} />
                     </li>
                 })}
             </ul>

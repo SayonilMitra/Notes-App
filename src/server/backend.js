@@ -147,6 +147,7 @@ app.delete('/deleteAll/:userId', cors(), (req, res) => {
 })
 
 mongoose.connect('mongodb+srv://root:sayonil@cluster0.vzcr6q5.mongodb.net/?retryWrites=true&w=majority')
+//mongoose.connect('mongodb://localhost:27017')
 
 app.listen(8000, () => {
     console.log('Back End Running')

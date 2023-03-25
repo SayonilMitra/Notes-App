@@ -3,11 +3,12 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
-function NotesListItem({ notesItem }) {
+function NotesListItem({ notesItem, search }) {
 
     let backendLink = require('../server/backendLink')
     let navigate = useNavigate()
     let [noteDeleted, setNoteDeleted] = useState('block')
+    let title = notesItem.title
 
     async function deleteNote() {
         axios.delete(`${backendLink}/deleteNote/${notesItem._id}`)
@@ -21,22 +22,24 @@ function NotesListItem({ notesItem }) {
         navigate('/updateNote')
     }
 
-    return <div className="note-item" style={{ display: `${noteDeleted}` }}>
-        <div className='note-time-stamp'>
-            {notesItem.date}, {notesItem.time}
-        </div>
-        <div className='note-title'>
-            {notesItem.title}
-        </div>
-        <div className='note-text'>
-            {notesItem.text.split('').slice(0, 100).join('')}...
-        </div>
-        <div className='note-item-buttons'>
-            <button onClick={deleteNote}>Delete</button>
-            <button onClick={updateNote}>Update</button>
-        </div>
+    return <>
+        {title.includes(search) ? <div className="note-item" style={{ display: `${noteDeleted}` }}>
+            <div className='note-time-stamp'>
+                {notesItem.date}, {notesItem.time}
+            </div>
+            <div className='note-title'>
+                {notesItem.title}
+            </div>
+            <div className='note-text'>
+                {notesItem.text.split('').slice(0, 100).join('')}...
+            </div>
+            <div className='note-item-buttons'>
+                <button onClick={deleteNote}>Delete</button>
+                <button onClick={updateNote}>Update</button>
+            </div>
+        </div> : <></>}
+    </>
 
-    </div>
 }
 
 export default NotesListItem
